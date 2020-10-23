@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native'
 import { Camera } from 'expo-camera'
@@ -8,7 +7,6 @@ export default function App() {
 
     let camera: Camera
 
-    const [startCamera, setStartCamera] = React.useState(false)
     const [previewVisible, setPreviewVisible] = React.useState(false)
     const [capturedImage, setCapturedImage] = React.useState<any>(null)
 
@@ -23,24 +21,12 @@ export default function App() {
         let res = await MediaLibrary.saveToLibraryAsync(capturedImage.uri)
         __sendPhoto(capturedImage)
         setPreviewVisible(false)
-        setStartCamera(false)
         setCapturedImage(null)
     }
 
     const __retakePicture = () => {
         setCapturedImage(null)
         setPreviewVisible(false)
-        __startCamera()
-    }
-
-    const __startCamera = async () => {
-        const { status } = await Camera.requestPermissionsAsync()
-        if (status === 'granted') {
-            // do something
-            setStartCamera(true)
-        } else {
-            alert("Access denied")
-        }
     }
 
     const __sendPhoto = async (photo: any) => {
@@ -123,9 +109,7 @@ export default function App() {
     }
 
     return (
-        <View style={styles.container}>
-            {startCamera ? (
-                <View
+        <View
                     style={{
                         flex: 1,
                         width: '100%'
@@ -192,42 +176,6 @@ export default function App() {
                             </Camera>
                         )}
                 </View>
-            ) : (
-                    <View
-                        style={{
-                            flex: 1,
-                            backgroundColor: '#fff',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                    >
-                        <TouchableOpacity
-                            onPress={__startCamera}
-                            style={{
-                                width: 130,
-                                borderRadius: 4,
-                                backgroundColor: '#14274e',
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: 40
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    color: '#fff',
-                                    fontWeight: 'bold',
-                                    textAlign: 'center'
-                                }}
-                            >
-                                Take picture
-                        </Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
-
-            <StatusBar style="auto" />
-        </View>
     )
 }
 
@@ -236,6 +184,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontFamily:'Druk',
     }
 })
