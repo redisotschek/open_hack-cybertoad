@@ -1,16 +1,15 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { ColorSchemeName } from 'react-native';
+import { ColorSchemeName, Image } from 'react-native';
 
 import MainPageScreen from '../screens/MainPageScreen';
+import WaterPageScreen from '../screens/WaterPageScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 
 import { RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
-// If you are not familiar with React Navigation, we recommend going through the
-// "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -21,15 +20,35 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   );
 }
 
-// A root stack navigator is often used for displaying modals on top of all other content
-// Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
+
+
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 50 }}
+      source={require('../assets/images/logo-title.svg')}
+    />
+  );
+}
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={MainPageScreen} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen name="Root" component={MainPageScreen} options={{ headerTitle: props => <LogoTitle {...props} /> }}/>
+      <Stack.Screen name="Water" component={WaterPageScreen} options={{ title: 'Вода' }} />
+      <Stack.Screen name="NotFound" component={NotFoundScreen}/>
     </Stack.Navigator>
   );
 }
+

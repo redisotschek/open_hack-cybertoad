@@ -1,6 +1,6 @@
 const tintColorLight = '#2f95dc';
 const primaryWhite = '#fff';
-const primaryBlack = '#000';
+const primaryBlack = '#1F232B';
 const primaryBlue1 = '#0ACEFF';
 const primaryBlue2 = '#0BA2D0';
 const primaryOpenBlue = '#02BAE8';
