@@ -35,7 +35,7 @@ function RootNavigator() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#f4511e',
+          backgroundColor: '#02BAE8',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -43,7 +43,8 @@ function RootNavigator() {
         },
         headerTitleAlign: 'center',
       }}>
-      <Stack.Screen name="Root" component={MainPageScreen} options={{ headerTitle: props => <LogoTitle {...props} /> }}/>
+      <Stack.Screen name="Root" component={MainPageScreen} options={{ headerTitle: props => <LogoTitle {...props} />,
+        headerTransparent: true,}}/>
       <Stack.Screen name="Water" component={WaterPageScreen} options={{ title: 'Вода' }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen}/>
     </Stack.Navigator>
