@@ -11,6 +11,7 @@ export default function App() {
 
     const [previewVisible, setPreviewVisible] = React.useState(false)
     const [capturedImage, setCapturedImage] = React.useState<any>(null)
+    const [flashMode, setFlashMode] = React.useState(false)
 
     const __takePicture = async () => {
         if (!camera) return
@@ -35,6 +36,10 @@ export default function App() {
         setCapturedImage(null)
         setPreviewVisible(false)
         DeviceEventEmitter.emit('closeCamera');
+    }
+
+    const __changeFlashMode = () => {
+        setFlashMode(!flashMode)
     }
 
     const __sendPhoto = async (photo: any) => {
@@ -146,6 +151,7 @@ export default function App() {
                     ) : (
                             <Camera
                                 style={{ flex: 1, width: "100%" }}
+                                flashMode={flashMode ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off}
                                 ref={(r) => {
                                     camera = r
                                 }}
@@ -167,7 +173,7 @@ export default function App() {
                                             justifyContent: 'space-between'
                                         }}
                                     >
-                                        <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'flex-end'}}>
+                                        <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'space-between'}}>
                                             <Icon
                                                 style={{
                                                     padding: 20,
@@ -176,6 +182,14 @@ export default function App() {
                                                 color="#fff"
                                                 onPress={__closeCamera}
                                                 name='close' />
+                                            <Icon
+                                                style={{
+                                                    padding: 20,
+                                                    fontSize: 20
+                                                }}
+                                                color="#fff"
+                                                onPress={__changeFlashMode}
+                                                name={!!flashMode ? 'flash-on' : 'flash-off'} />
                                         </View>
                                     </View>
                                     <View
