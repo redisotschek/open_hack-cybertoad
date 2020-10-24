@@ -1,12 +1,15 @@
 import * as React from 'react';
-import {StyleSheet, Alert, Modal, Text, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, Alert, Modal, Text, TouchableHighlight, View, TouchableOpacity} from 'react-native';
 import {useState} from "react";
 
 import CameraView from '../components/CameraView'
 
-
 export default function WaterPageScreen() {
     const [modalVisible, setModalVisible] = useState(false);
+
+    const closeCamera = () => {
+        setModalVisible(false)
+    }
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -20,15 +23,6 @@ export default function WaterPageScreen() {
               <View style={styles.centeredView}>
                   <View style={styles.modalView}>
                       <CameraView></CameraView>
-
-                      <TouchableHighlight
-                          style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                          onPress={() => {
-                              setModalVisible(!modalVisible);
-                          }}
-                      >
-                          <Text style={styles.textStyle}>Hide Modal</Text>
-                      </TouchableHighlight>
                   </View>
               </View>
             </Modal>
@@ -55,6 +49,7 @@ const styles = StyleSheet.create({
     modalView: {
         flex: 1,
         width: "100%",
+        position: "relative",
         backgroundColor: "white",
         alignItems: "center",
         shadowColor: "#000",
@@ -80,5 +75,12 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: "center"
+    },
+    closeButton: {
+        marginTop: 25,
+        height: 20,
+        top: 20,
+        right: 20,
+        backgroundColor: "transparent"
     }
 });

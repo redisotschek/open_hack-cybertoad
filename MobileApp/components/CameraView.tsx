@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react
 import { Camera } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 
+import { Icon } from 'react-native-elements'
+
 export default function App() {
 
     let camera: Camera
@@ -29,11 +31,17 @@ export default function App() {
         setPreviewVisible(false)
     }
 
+    const __closeCamera = () => {
+        setCapturedImage(null)
+        setPreviewVisible(false)
+
+    }
+
     const __sendPhoto = async (photo: any) => {
         console.log('loh')
     }
 
-    const CameraPreview = ({photo, retakePicture, savePhoto}: any) => {
+    const CameraPreview = ({photo, retakePicture, savePhoto, closeCamera}: any) => {
         return (
           <View
             style={{
@@ -68,7 +76,7 @@ export default function App() {
                     style={{
                       width: 130,
                       height: 40,
-      
+
                       alignItems: 'center',
                       borderRadius: 4
                     }}
@@ -87,7 +95,7 @@ export default function App() {
                     style={{
                       width: 130,
                       height: 40,
-      
+
                       alignItems: 'center',
                       borderRadius: 4
                     }}
@@ -116,7 +124,7 @@ export default function App() {
                     }}
                 >
                     {previewVisible && capturedImage ? (
-                        <CameraPreview photo={capturedImage} savePhoto={__savePhoto} retakePicture={__retakePicture} />
+                        <CameraPreview photo={capturedImage} savePhoto={__savePhoto} retakePicture={__retakePicture} closeCamera={__closeCamera} />
                     ) : (
                             <Camera
                                 style={{ flex: 1, width: "100%" }}
@@ -135,12 +143,22 @@ export default function App() {
                                     <View
                                         style={{
                                             position: 'absolute',
-                                            left: '5%',
-                                            top: '10%',
+                                            left: '0%',
+                                            top: '0%',
                                             flexDirection: 'column',
                                             justifyContent: 'space-between'
                                         }}
                                     >
+                                        <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'flex-end'}}>
+                                            <Icon
+                                                style={{
+                                                    padding: 20,
+                                                    fontSize: 20
+                                                }}
+                                                color="#fff"
+                                                onPress={__closeCamera}
+                                                name='close' />
+                                        </View>
                                     </View>
                                     <View
                                         style={{
@@ -186,5 +204,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily:'Druk',
+    },
+    closeButton: {
+        backgroundColor: "transparent",
+        width: 50
     }
 })
