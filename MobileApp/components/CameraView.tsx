@@ -80,7 +80,7 @@ export default function App() {
                           justifyContent: 'space-between'
                       }}
                   >
-                      <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'flex-start'}}>
+                      <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'flex-start', marginTop: 30}}>
                           <Icon
                               style={{
                                   padding: 20,
@@ -165,33 +165,26 @@ export default function App() {
                                         flexDirection: 'row'
                                     }}
                                 >
-                                    <View
-                                        style={{
-                                            position: 'absolute',
-                                            left: '0%',
-                                            top: '0%',
-                                            flexDirection: 'column',
-                                            justifyContent: 'space-between'
-                                        }}
-                                    >
-                                        <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'space-between'}}>
-                                            <Icon
-                                                style={{
-                                                    padding: 20,
-                                                    fontSize: 20
-                                                }}
-                                                color="#fff"
-                                                onPress={__closeCamera}
-                                                name='close' />
-                                            <Icon
-                                                style={{
-                                                    padding: 20,
-                                                    fontSize: 20
-                                                }}
-                                                color="#fff"
-                                                onPress={__changeFlashMode}
-                                                name={!!flashMode ? 'flash-on' : 'flash-off'} />
-                                        </View>
+
+                                    <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'space-between', alignContent: 'stretch', marginTop: 30}}>
+                                        <Icon
+                                            style={{
+                                                padding: 20,
+                                                fontSize: 20,
+                                                alignSelf: "flex-start"
+                                            }}
+                                            color="#fff"
+                                            onPress={__closeCamera}
+                                            name='close' />
+                                        <Icon
+                                            style={{
+                                                padding: 20,
+                                                fontSize: 20,
+                                                alignSelf: "flex-end"
+                                            }}
+                                            color="#fff"
+                                            onPress={__changeFlashMode}
+                                            name={!!flashMode ? 'flash-on' : 'flash-off'} />
                                     </View>
                                     <View
                                         style={{

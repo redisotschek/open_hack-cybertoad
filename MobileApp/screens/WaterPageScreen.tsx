@@ -70,7 +70,6 @@ export default function WaterPageScreen() {
         animationType="slide"
         transparent={ true }
         visible={ modalVisible }
-        presentationStyle={ 'overFullScreen' }
         onRequestClose={ () => {
           Alert.alert('Modal has been closed.');
         } }
@@ -133,40 +132,39 @@ export default function WaterPageScreen() {
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
-    backgroundColor: 'white',
-    margin: 0, // This is the important style you need to set
-    alignItems: undefined,
-    justifyContent: undefined,
-  },
-  openButton: {
-    backgroundColor: '#f194ff',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    textAlign: 'center',
-  },
-  closeButton: {
-    marginTop: 25,
-    height: 20,
-    top: 20,
-    right: 20,
-    backgroundColor: 'transparent',
-  },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalView: {
+        width: "100%",
+        height: "100%",
+        position: "relative",
+        backgroundColor: 'white',
+        margin: 0, // This is the important style you need to set
+        alignItems: undefined,
+        justifyContent: undefined,
+    },
+    openButton: {
+        backgroundColor: "#F194FF",
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        textAlign: "center"
+    },
+    closeButton: {
+        marginTop: 25,
+        height: 20,
+        top: 20,
+        right: 20,
+        backgroundColor: "transparent"
+    }
 });
