@@ -7,23 +7,57 @@ import {
   TouchableHighlight,
   View,
   TouchableOpacity,
-  TextInput, Image, Button,
-    DeviceEventEmitter
+  TextInput, Image, Button, DeviceEventEmitter
 } from 'react-native';
 import { useState } from 'react';
 import customStyles from '../constants/Styles';
 
 import CameraView from '../components/CameraView';
+import {Icon} from "react-native-elements";
+import {Camera} from "expo-camera";
 
 export default function WaterPageScreen() {
   const [modalVisible, setModalVisible] = useState(false);
-  const cameraImg = require('../assets/images/camera.png');
 
     const closeCamera = () => {
         setModalVisible(false)
     }
 
+    const openCamera = async () => {
+        const { status } = await Camera.requestPermissionsAsync()
+        if (status === 'granted') {
+            // do something
+            setModalVisible(true)
+        } else {
+            alert("Access denied")
+        }
+    }
+
     const eventListener = DeviceEventEmitter.addListener('closeCamera', closeCamera);
+
+    const PhotoBtn = () => {
+        return (
+            <View
+                style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: '29%',
+                }}
+
+            >
+                <Icon
+                    style={{
+                        width: 36,
+                        height: 36,
+                        opacity: 0.5
+                    }}
+                    onPress={ () => {
+                        openCamera();
+                    }}
+                    name={'center-focus-weak'}/>
+            </View>
+        )
+    }
 
     return (
       <View style={{
@@ -33,6 +67,7 @@ export default function WaterPageScreen() {
               animationType="slide"
               transparent={true}
               visible={modalVisible}
+              presentationStyle={"overFullScreen"}
               onRequestClose={() => {
                   Alert.alert("Modal has been closed.");
               }}
@@ -62,25 +97,7 @@ export default function WaterPageScreen() {
           <View style={ [customStyles.inputHint] }>
             <Text style={ customStyles.grayText }>Холодная вода</Text>
           </View>
-          <TouchableHighlight
-            style={{
-              position: 'absolute',
-              right: 5,
-              top: '25%',
-            }}
-            onPress={ () => {
-              setModalVisible(true);
-            } }
-          >
-            <Image
-              source={ cameraImg }
-              style={ {
-                width: 35,
-                height: 35,
-                opacity: 0.5,
-              } }
-            />
-          </TouchableHighlight>
+            <PhotoBtn></PhotoBtn>
         </View>
 
         <View>
@@ -91,25 +108,7 @@ export default function WaterPageScreen() {
           <View style={ [customStyles.inputHint] }>
             <Text style={ customStyles.grayText }>Горячая вода</Text>
           </View>
-          <TouchableHighlight
-            style={{
-              position: 'absolute',
-              right: 5,
-              top: '25%',
-            }}
-            onPress={ () => {
-              setModalVisible(true);
-            } }
-          >
-            <Image
-              source={ cameraImg }
-              style={ {
-                width: 35,
-                height: 35,
-                opacity: 0.5,
-              } }
-            />
-          </TouchableHighlight>
+            <PhotoBtn></PhotoBtn>
         </View>
       </View>
       {/*<View*/}
@@ -136,15 +135,13 @@ const styles = StyleSheet.create({
         marginTop: 22
     },
     modalView: {
-        flex: 1,
         width: "100%",
+        height: "100%",
         position: "relative",
-        backgroundColor: "white",
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
+        backgroundColor: 'white',
+        margin: 0, // This is the important style you need to set
+        alignItems: undefined,
+        justifyContent: undefined,
     },
     openButton: {
         backgroundColor: "#F194FF",
