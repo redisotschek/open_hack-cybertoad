@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "open_hack",
-    "slug": "open_hack",
+    "name": "Derzhi Cyberzhabu",
+    "slug": "open_space_hack_cyberzhaba",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +22,8 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
-    }
+      "favicon": "./assets/images/icon.png"
+    },
+    "description": "This app is created as a task for Open Space Hack Russia by team Derzhi Kiberzhabu"
   }
 }
