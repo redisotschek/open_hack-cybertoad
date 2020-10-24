@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity,
   TextInput, Image, Button,
+    DeviceEventEmitter
 } from 'react-native';
 import { useState } from 'react';
 import customStyles from '../constants/Styles';
@@ -18,27 +19,30 @@ export default function WaterPageScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const cameraImg = require('../assets/images/camera.png');
 
-  const closeCamera = () => {
-    setModalVisible(false);
-  };
-  return (
-    <View style={{
-      flex: 1,
-    }}>
-      <Modal
-        animationType="slide"
-        transparent={ true }
-        visible={ modalVisible }
-        onRequestClose={ () => {
-          Alert.alert('Modal has been closed.');
-        } }
-      >
-        <View style={ styles.centeredView }>
-          <View style={ styles.modalView }>
-            <CameraView></CameraView>
-          </View>
-        </View>
-      </Modal>
+    const closeCamera = () => {
+        setModalVisible(false)
+    }
+
+    const eventListener = DeviceEventEmitter.addListener('closeCamera', closeCamera);
+
+    return (
+      <View style={{
+          flex: 1,
+      }}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+              }}
+            >
+              <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                      <CameraView></CameraView>
+                  </View>
+              </View>
+            </Modal>
 
       <View style={ customStyles.px10 }>
         <TextInput
@@ -125,47 +129,42 @@ export default function WaterPageScreen() {
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    flex: 1,
-    width: '100%',
-    position: 'relative',
-    backgroundColor: 'white',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  openButton: {
-    backgroundColor: '#f194ff',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  closeButton: {
-    marginTop: 25,
-    height: 20,
-    top: 20,
-    right: 20,
-    backgroundColor: 'transparent',
-  },
+    modalView: {
+        flex: 1,
+        width: "100%",
+        position: "relative",
+        backgroundColor: "white",
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+    },
+    openButton: {
+        backgroundColor: "#F194FF",
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        textAlign: "center"
+    },
+    closeButton: {
+        marginTop: 25,
+        height: 20,
+        top: 20,
+        right: 20,
+        backgroundColor: "transparent"
+    }
 });
