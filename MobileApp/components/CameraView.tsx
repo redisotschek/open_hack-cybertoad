@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native'
+import {StyleSheet, Text, View, TouchableOpacity, ImageBackground, DeviceEventEmitter} from 'react-native'
 import { Camera } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 
@@ -34,7 +34,7 @@ export default function App() {
     const __closeCamera = () => {
         setCapturedImage(null)
         setPreviewVisible(false)
-
+        DeviceEventEmitter.emit('closeCamera');
     }
 
     const __sendPhoto = async (photo: any) => {
@@ -76,7 +76,6 @@ export default function App() {
                     style={{
                       width: 130,
                       height: 40,
-
                       alignItems: 'center',
                       borderRadius: 4
                     }}
@@ -95,7 +94,6 @@ export default function App() {
                     style={{
                       width: 130,
                       height: 40,
-
                       alignItems: 'center',
                       borderRadius: 4
                     }}
