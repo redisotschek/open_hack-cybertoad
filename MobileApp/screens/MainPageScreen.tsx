@@ -1,15 +1,11 @@
 import * as React from 'react';
-import { Text, View, TouchableHighlight, ImageBackground, Dimensions, Image } from 'react-native';
+import { Text, View, ImageBackground, Image } from 'react-native';
 import NAVIGATION_ITEMS from '../constants/NavigationItems';
 import styles from '../constants/Styles';
 
 // @ts-ignore
 export default function MainPageScreen({navigation}) {
-  const DeviceWidth: number = Dimensions.get('window').width;
-  const MenuItemSizeStyle = {
-    width: DeviceWidth / 3,
-    height: DeviceWidth / 3,
-  };
+
   const MenuItems = NAVIGATION_ITEMS.map((item, i) => {
     const isItemMiddle = i === 1 || (i - 1 > 0 && (i - 1) % 3 === 0);
     const blockStyles = isItemMiddle ? styles.menuItemStyle : [styles.menuItemStyle, styles.noHorizontalBorder];
@@ -17,7 +13,7 @@ export default function MainPageScreen({navigation}) {
     return (
       <View
         key={ item.id }
-        style={ [MenuItemSizeStyle, blockStyles] }
+        style={ blockStyles }
         onStartShouldSetResponder={ () => navigation.navigate(item.link) }
       >
         <View style={{flex: 3, justifyContent: 'flex-end'}}>
@@ -45,6 +41,7 @@ export default function MainPageScreen({navigation}) {
       style={ {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: 'gray',
       } }
     >
       <ImageBackground

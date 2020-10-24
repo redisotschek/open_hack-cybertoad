@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const DeviceWidth: number = Dimensions.get('window').width;
 
 const colors = {
   black: '#1f232b',
@@ -66,12 +68,22 @@ const styles = StyleSheet.create({
   whiteText: {
     color: colors.white,
   },
+  grayText: {
+    color: colors.gray5,
+  },
+  regularButton: {
+    width: 256,
+    height: 256,
+    backgroundColor: colors.openBlue,
+  },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
   },
   menuItemStyle: {
+    width: DeviceWidth / 3,
+    height: DeviceWidth / 3,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'rgba(158, 150, 150, .5)',
@@ -81,6 +93,37 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     borderLeftWidth: 0,
   },
+  input: {
+    backgroundColor: colors.white,
+    height: 46,
+    width: '100%',
+    padding: 10,
+    marginTop: 15,
+  },
+  inputDisabled: {
+    backgroundColor: colors.gray2,
+    color: colors.gray4,
+  },
+  inputError: {
+    borderColor: colors.error,
+    borderWidth: 2,
+  },
+  inputHint: {
+    justifyContent: 'center',
+    width: '100%',
+    height: 25,
+    padding: 5,
+    color: colors.gray5,
+  },
+  inputHintError: {
+    backgroundColor: '#FFE6EB',
+  },
+  errorText: {
+    color: '#DB002C',
+  },
+  px10: {
+    paddingHorizontal: 10,
+  }
 });
 
 export default styles;
