@@ -4,7 +4,7 @@ import * as React from 'react';
 import {Image} from 'react-native';
 
 import MainPageScreen from '../screens/MainPageScreen';
-import WaterPageScreen from '../screens/WaterPageScreen';
+import FormPageScreen from '../screens/FormPageScreen';
 import TestPageScreen from '../screens/TestPageScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 
@@ -51,7 +51,7 @@ function RootNavigator() {
       }}>
       <Stack.Screen name="Root" component={MainPageScreen} options={{ headerTitle: props => <LogoTitle {...props} />,
         headerTransparent: true,}}/>
-      <Stack.Screen name="Water" component={WaterPageScreen} options={{ title: 'Вода' }} />
+      <Stack.Screen name="Form" component={FormPageScreen} options={{ title: 'Коммунальные услуги' }} />
       <Stack.Screen name="Test" component={TestPageScreen} options={{ title: 'Тестирование' }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen}/>
     </Stack.Navigator>

@@ -14,7 +14,7 @@ export default function MainPageScreen({navigation}) {
       <View
         key={ item.id }
         style={ blockStyles }
-        onStartShouldSetResponder={ () => navigation.navigate(item.link) }
+        onStartShouldSetResponder={ () => navigation.navigate(item.link, item.form) }
       >
         <View style={{flex: 3, justifyContent: 'flex-end'}}>
           <Image

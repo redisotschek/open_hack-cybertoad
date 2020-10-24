@@ -1,6 +1,6 @@
 export type RootStackParamList = {
   Root: undefined;
-  Water: undefined;
+  Form: undefined;
   Test: undefined;
   NotFound: undefined;
 };

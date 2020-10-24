@@ -21,6 +21,10 @@ const colors = {
   warning: '#FF7F00',
   success: '#00D448',
 };
+const inputHeight: number = 46;
+const inputHintHeight: number = 25;
+const inputIconSize: number = 36;
+const inputIconPosition: number = (inputHeight/2) - (inputIconSize/3);
 
 const styles = StyleSheet.create({
   textH1: {
@@ -71,11 +75,23 @@ const styles = StyleSheet.create({
   grayText: {
     color: colors.gray5,
   },
+  centerContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   regularButton: {
     width: 256,
-    paddingVertical: 16,
+    height: 50,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.openBlue,
+  },
+  criticalButton: {
+    width: 256,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.success,
   },
   backgroundImage: {
     flex: 1,
@@ -96,7 +112,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: colors.white,
-    height: 46,
+    height: inputHeight,
     width: '100%',
     padding: 10,
   },
@@ -111,9 +127,19 @@ const styles = StyleSheet.create({
   inputHint: {
     justifyContent: 'center',
     width: '100%',
-    height: 25,
+    height: inputHintHeight,
     padding: 5,
     color: colors.gray5,
+  },
+  inputIconContainer: {
+    position: 'absolute',
+    right: 0,
+    top: inputIconPosition,
+  },
+  inputIcon: {
+    width: inputIconSize,
+    height: inputIconSize,
+    opacity: 0.5,
   },
   inputHintError: {
     backgroundColor: '#FFE6EB',
@@ -137,6 +163,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: '#00000050'
   },
+  spacer: {
+    flexGrow: 1,
+  },
 });
+
 
 export default styles;
