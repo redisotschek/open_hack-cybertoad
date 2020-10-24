@@ -17,7 +17,7 @@ export default function useCachedResources() {
           ...Ionicons.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
           'Druk': require('../assets/fonts/DrukTextCy-Medium-App.ttf'),
-          'Graphik': require('../assets/fonts/GraphikLC-Regular-Desktop.otf'),
+          'Graphik LC': require('../assets/fonts/GraphikLC-Regular-Desktop.otf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
