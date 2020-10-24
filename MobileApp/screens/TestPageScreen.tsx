@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import * as React from 'react';
-import { TouchableHighlight, View, Text, Animated, Easing } from 'react-native';
+import { TouchableHighlight, View, Text } from 'react-native';
 import { Spinner } from '../components/Spinner';
 import styles from '../constants/Styles';
 
 export default function TestPageScreen() {
+  let [isLoading] = useState(false);
+
+  const buttonContent = isLoading ? <Spinner size={20}/> : <Text style={[styles.textM, styles.whiteText]}>Загрузить фото</Text>;
 
   return (
     <View
@@ -13,14 +17,11 @@ export default function TestPageScreen() {
         alignItems: 'center'
       }}
     >
-      <TouchableHighlight>
+      <TouchableHighlight onPress={() => isLoading = true}>
         <View style={styles.regularButton}>
-          <Text style={[styles.textM, styles.whiteText]}>Загрузить фото</Text>
+          { buttonContent }
         </View>
       </TouchableHighlight>
-
-      <Spinner/>
     </View>
   );
 }
-

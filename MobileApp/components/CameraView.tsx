@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 
 import { Icon } from 'react-native-elements'
+import { Spinner } from './Spinner';
 
 export default function App() {
 
@@ -198,13 +199,11 @@ export default function App() {
                                         >
                                             <TouchableOpacity
                                                 onPress={__takePicture}
+                                              style={{
+                                                bottom: 20,
+                                              }}
                                             >
-                                                <Image style={{
-                                                    width: 70,
-                                                    height: 68,
-                                                    bottom: 20,
-                                                    borderRadius: 50,
-                                                }} source={require('../assets/images/open-logo.png')}/>
+                                                <Spinner size={70}/>
                                             </TouchableOpacity>
                                         </View>
                                     </View>

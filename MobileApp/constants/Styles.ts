@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     height: 46,
     width: '100%',
     padding: 10,
-    marginTop: 15,
   },
   inputDisabled: {
     backgroundColor: colors.gray2,
@@ -124,7 +123,20 @@ const styles = StyleSheet.create({
   },
   px10: {
     paddingHorizontal: 10,
-  }
+  },
+  pb5: {
+    paddingBottom: 5,
+  },
+  py15: {
+    paddingVertical: 15,
+  },
+  modalBackground: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#00000050'
+  },
 });
 
 export default styles;
