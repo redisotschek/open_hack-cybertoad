@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View, TouchableOpacity, ImageBackground, DeviceEventEmitter} from 'react-native'
+import {Image, StyleSheet, Text, View, TouchableOpacity, ImageBackground, DeviceEventEmitter} from 'react-native'
 import { Camera } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 
@@ -65,6 +65,26 @@ export default function App() {
                   justifyContent: 'flex-end'
                 }}
               >
+                  <View
+                      style={{
+                          position: 'absolute',
+                          left: '0%',
+                          top: '0%',
+                          flexDirection: 'column',
+                          justifyContent: 'space-between'
+                      }}
+                  >
+                      <View style={{flexDirection: "row", flex: 1, width: "100%", justifyContent: 'flex-start'}}>
+                          <Icon
+                              style={{
+                                  padding: 20,
+                                  fontSize: 20
+                              }}
+                              color="#fff"
+                              onPress={__closeCamera}
+                              name='close' />
+                      </View>
+                  </View>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -178,14 +198,14 @@ export default function App() {
                                         >
                                             <TouchableOpacity
                                                 onPress={__takePicture}
-                                                style={{
+                                            >
+                                                <Image style={{
                                                     width: 70,
-                                                    height: 70,
-                                                    bottom: 0,
+                                                    height: 68,
+                                                    bottom: 20,
                                                     borderRadius: 50,
-                                                    backgroundColor: '#fff'
-                                                }}
-                                            />
+                                                }} source={require('../assets/images/open-logo.png')}/>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
