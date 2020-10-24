@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
   },
   regularButton: {
     width: 256,
-    height: 256,
+    paddingVertical: 16,
+    alignItems: 'center',
     backgroundColor: colors.openBlue,
   },
   backgroundImage: {
