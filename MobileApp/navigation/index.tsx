@@ -26,6 +26,10 @@ function LogoTitle() {
   return (
     <Image
       source={require('../assets/images/logo-title.png')}
+      style={{
+        width: 200,
+        height: 40,
+      }}
     />
   );
 }
