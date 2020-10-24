@@ -1,7 +1,7 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { ColorSchemeName, Image } from 'react-native';
+import {ColorSchemeName, Image, View} from 'react-native';
 
 import MainPageScreen from '../screens/MainPageScreen';
 import WaterPageScreen from '../screens/WaterPageScreen';
@@ -22,12 +22,10 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 50 }}
-      source={require('../assets/images/logo-title.svg')}
+      source={require('../assets/images/logo-title.png')}
     />
   );
 }
