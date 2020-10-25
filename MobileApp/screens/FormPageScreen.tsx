@@ -61,7 +61,7 @@ export default function FormPageScreen({route, navigation}) {
 
       <View style={ styles.centerContent }>
         <TouchableHighlight onPress={() => fakePayment()}>
-          <View style={ styles.criticalButton }>
+          <View style={ styles.regularButton }>
             { buttonContent }
           </View>
         </TouchableHighlight>
