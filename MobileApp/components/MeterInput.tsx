@@ -6,29 +6,26 @@ import { Icon } from 'react-native-elements';
 import customStyles from '../constants/Styles';
 import CameraView from './CameraView';
 import { Spinner } from './Spinner';
+import ImagePicker from "./ImagePicker";
 
 export function MeterInput() {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const closeCamera = () => {
-    setModalVisible(false);
-  };
+  const openModal = () => {
+    setModalVisible(true);
+  }
 
-  const openCamera = async () => {
-    const {status} = await Camera.requestPermissionsAsync();
-    if (status === 'granted') {
-      setModalVisible(true);
-    } else {
-      alert('Access denied');
-    }
-  };
+  const closeModal = () => {
+    setModalVisible(false);
+  }
 
   const sendPhoto = (photo: CameraCapturedPicture) => {
+    closeModal()
     console.log('uri', photo.uri);
-    console.log('base64', photo.base64);
+    // console.log('base64', photo.base64);
   };
 
-  DeviceEventEmitter.addListener('closeCamera', closeCamera);
+  DeviceEventEmitter.addListener('closeModal', closeModal);
   DeviceEventEmitter.addListener('sendPhoto', (photo) => sendPhoto(photo));
 
   const PhotoBtn = () => {
@@ -39,7 +36,7 @@ export function MeterInput() {
         <Icon
           style={customStyles.inputIcon}
           onPress={ () => {
-            openCamera();
+            openModal();
           } }
           name={ 'center-focus-weak' }
         />
@@ -59,7 +56,8 @@ export function MeterInput() {
       >
         <View style={ styles.centeredView }>
           <View style={ styles.modalView }>
-            <CameraView></CameraView>
+            {/*<CameraView></CameraView>*/}
+            <ImagePicker></ImagePicker>
           </View>
         </View>
       </Modal>
