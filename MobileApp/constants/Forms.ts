@@ -16,8 +16,3 @@ export interface Form {
   labelFirst: string;
   labelSecond: string;
 }
-
-export interface MeterValue {
-  value: string;
-  serialNumber?: string;
-}

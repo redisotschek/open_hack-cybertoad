@@ -25,7 +25,7 @@ const colors = {
 const inputHeight: number = 46;
 const inputHintHeight: number = 25;
 const inputIconSize: number = 36;
-const inputIconPosition: number = (inputHeight/2) - (inputIconSize/3);
+const inputIconPosition: number = inputHeight - inputIconSize/2;
 
 const styles = StyleSheet.create({
   textH1: {
@@ -189,7 +189,12 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     marginBottom: 10,
-  }
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 

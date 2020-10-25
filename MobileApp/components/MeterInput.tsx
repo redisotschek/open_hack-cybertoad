@@ -8,16 +8,12 @@ import customStyles from '../constants/Styles';
 import { Spinner } from './Spinner';
 import ImagePicker from './ImagePicker';
 
-export default class MeterInput extends Component<{}, { modalVisible: boolean, value: string, serialNumber: string }> {
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-
-    this.state = {
-      modalVisible: false,
-      value: '',
-      serialNumber: '',
-    };
-  }
+export default class MeterInput extends Component {
+  state = {
+    modalVisible: false,
+    value: {},
+    serialNumber: {},
+  };
 
   componentDidMount(): void {
     DeviceEventEmitter.addListener('closeModal', () => this.switchModal(false));
@@ -41,7 +37,7 @@ export default class MeterInput extends Component<{}, { modalVisible: boolean, v
   };
 
   switchModal(value: boolean = true): void {
-    this.setState(Object.assign(this.state, {modalVisible: value}));
+    this.setState({modalVisible: value});
   };
 
   openCamera() {
@@ -66,7 +62,7 @@ export default class MeterInput extends Component<{}, { modalVisible: boolean, v
       })
       .then((response) => response.json())
       .then((json) => {
-        this.setState(Object.assign(this.state, json));
+        this.setState(json);
       })
       .catch((error) => {
         console.error(error);
@@ -82,7 +78,7 @@ export default class MeterInput extends Component<{}, { modalVisible: boolean, v
           visible={ this.state.modalVisible }
         >
           <View style={ styles.centeredView }>
-            <ImagePicker></ImagePicker>
+            <ImagePicker/>
           </View>
         </Modal>
 
