@@ -29,9 +29,9 @@ const inputIconPosition: number = (inputHeight/2) - (inputIconSize/3);
 const styles = StyleSheet.create({
   textH1: {
     fontFamily: 'Druk',
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '500',
-    textAlign: 'left',
+    textAlign: 'right',
   },
   textH2: {
     fontFamily: 'Graphik LC',
@@ -84,14 +84,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.openBlue,
-  },
-  criticalButton: {
-    width: 256,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.gray6,
+    backgroundColor: colors.gray5,
   },
   backgroundImage: {
     flex: 1,
@@ -166,6 +159,17 @@ const styles = StyleSheet.create({
   spacer: {
     flexGrow: 1,
   },
+  testResultsContainer: {
+    width: DeviceWidth,
+    padding: 20,
+  },
+  testValue: {
+    backgroundColor: colors.gray2,
+    color: colors.gray4,
+    width: '100%',
+    padding: 10,
+    marginBottom: 10,
+  }
 });
 
 
