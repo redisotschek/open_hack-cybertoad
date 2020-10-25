@@ -1,136 +1,151 @@
 import { Camera, CameraCapturedPicture } from 'expo-camera';
-import { useState } from 'react';
+import { Component } from 'react';
 import * as React from 'react';
 import { Alert, DeviceEventEmitter, Modal, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import customStyles from '../constants/Styles';
-import CameraView from './CameraView';
 import { Spinner } from './Spinner';
 import ImagePicker from "./ImagePicker";
 
-export function MeterInput() {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [value, setValue] = useState('')
-  const [serialNumber, setSerialNumber] = useState('')
+export default class MeterInput extends Component<{}, { modalVisible: boolean, value: string, serialNumber: string }> {
+    constructor(props: {} | Readonly<{}>) {
+        super(props);
 
-  const openModal = () => {
-    setModalVisible(true);
-  }
+        this.state = {
+            modalVisible: false,
+            value: '',
+            serialNumber: '',
+        };
+    }
 
-  const closeModal = () => {
-    setModalVisible(false);
-  }
+    componentDidMount(): void {
+        DeviceEventEmitter.addListener('closeModal', () => this.switchModal(false));
+        DeviceEventEmitter.addListener('sendPhoto', (photo) => this.sendPhoto(photo));
+    }
 
+    photoBtn(): JSX.Element {
+        return (
+            <View
+                style={ customStyles.inputIconContainer }
+            >
+                <Icon
+                    style={ customStyles.inputIcon }
+                    onPress={ () => {
+                        this.openCamera();
+                    } }
+                    name={ 'center-focus-weak' }
+                />
+            </View>
+        );
+    };
 
-const sendPhoto = (photo: CameraCapturedPicture): Promise<void> => {
-    return fetch('http://192.168.31.123:5000/fullData',
-        {
-            //method: 'POST'
-            // body: JSON.stringify({
-            //   base64: photo.base64,
-            // })
-        })
-        .then((response) => response.json())
-        .then((json) => {
-            this.setState(Object.assign(this.state, json ));
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-};
+    switchModal(value: boolean = true): void {
+        this.setState(Object.assign(this.state, { modalVisible: value } ));
+    };
 
-  DeviceEventEmitter.addListener('closeModal', closeModal);
-  DeviceEventEmitter.addListener('sendPhoto', (photo) => sendPhoto(photo));
+    openCamera() {
+        Camera.requestPermissionsAsync()
+            .then(response => {
+                if (response.status === 'granted') {
+                    this.switchModal();
+                } else {
+                    alert('Access denied');
+                }
+            })
+    };
 
-  const PhotoBtn = () => {
-    return (
-      <View
-        style={customStyles.inputIconContainer}
-      >
-        <Icon
-          style={customStyles.inputIcon}
-          onPress={ () => {
-            openModal();
-          } }
-          name={ 'center-focus-weak' }
-        />
-      </View>
-    );
-  };
+    sendPhoto(photo: CameraCapturedPicture): Promise<void> {
+        this.switchModal(false)
+        return fetch('http://192.168.31.123:5000/fullData',
+            {
+                //method: 'POST'
+                // body: JSON.stringify({
+                //   base64: photo.base64,
+                // })
+            })
+            .then((response) => response.json())
+            .then((json) => {
+                this.setState(Object.assign(this.state, json ));
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
-  return (
-    <View>
-      <Modal
-        animationType="slide"
-        transparent={ true }
-        visible={ modalVisible }
-        onRequestClose={ () => {
-          Alert.alert('Modal has been closed.');
-        } }
-      >
-        <View style={ styles.centeredView }>
-          <View style={ styles.modalView }>
-            {/*<CameraView></CameraView>*/}
-            <ImagePicker></ImagePicker>
-          </View>
-        </View>
-      </Modal>
-
-
-      <TextInput
-        style={ [customStyles.input, {paddingRight: 40}] }
-        value={value}
-        keyboardType={ 'numeric' }
-      />
-      <View style={ [customStyles.inputHint] }>
-        {/*TODO: Добавить текст ошибки*/ }
-        <Text style={ customStyles.grayText }></Text>
-      </View>
-        { !!serialNumber && (
+    render(): JSX.Element {
+        return (
             <View>
-                <Text style={ [customStyles.grayText, customStyles.textXS, customStyles.pb5] }>Серийный номер счетчика</Text>
+                <Modal
+                    animationType="slide"
+                    transparent={ true }
+                    visible={ this.state.modalVisible }
+                    onRequestClose={ () => {
+                        Alert.alert('Modal has been closed.');
+                    } }
+                >
+                    <View style={ styles.centeredView }>
+                        <View style={ styles.modalView }>
+                            <ImagePicker></ImagePicker>
+                        </View>
+                    </View>
+                </Modal>
+
+
                 <TextInput
                     style={ [customStyles.input, {paddingRight: 40}] }
-                    value={ serialNumber }
+                    value={ this.state.value }
                     keyboardType={ 'numeric' }
                 />
                 <View style={ [customStyles.inputHint] }>
+                    {/*TODO: Добавить текст ошибки*/ }
+                    <Text style={ customStyles.grayText }></Text>
                 </View>
+                { !!this.state.serialNumber && (
+                    <View>
+                        <Text style={ [customStyles.grayText, customStyles.textXS, customStyles.pb5] }>Серийный номер счетчика</Text>
+                        <TextInput
+                            style={ [customStyles.input, {paddingRight: 40}] }
+                            value={ this.state.serialNumber }
+                            keyboardType={ 'numeric' }
+                        />
+                        <View style={ [customStyles.inputHint] }>
+                        </View>
+                    </View>
+                ) }
+                {this.photoBtn()}
+
+
+                <Modal
+                    visible={ false }
+                    transparent={ true }
+                    animationType={ 'none' }
+                >
+                    <View style={ styles.modalBackground }>
+                        <Spinner size={ 40 }/>
+                    </View>
+                </Modal>
             </View>
-        ) }
-      <PhotoBtn/>
-
-
-      <Modal
-        visible={ false }
-        transparent={ true }
-        animationType={ 'none' }
-      >
-        <View style={ styles.modalBackground }>
-          <Spinner size={ 40 }/>
-        </View>
-      </Modal>
-    </View>
-  );
+        );
+    };
 }
 
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalView: {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
-    backgroundColor: 'white',
-    margin: 0,
-    alignItems: undefined,
-    justifyContent: undefined,
-  },
-  modalBackground: {
-    backgroundColor: '#00000040',
-  },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalView: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        backgroundColor: 'white',
+        margin: 0,
+        alignItems: undefined,
+        justifyContent: undefined,
+    },
+    modalBackground: {
+        backgroundColor: '#00000040',
+    },
 });
