@@ -46,6 +46,7 @@ function RootNavigator() {
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontFamily: 'Graphik LC',
         },
         headerTitleAlign: 'center',
         headerBackTitleVisible: false,

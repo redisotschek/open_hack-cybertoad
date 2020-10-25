@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 const DeviceWidth: number = Dimensions.get('window').width;
+const DeviceHeight: number = Dimensions.get('window').height;
 
 const colors = {
   black: '#1f232b',
@@ -158,6 +159,25 @@ const styles = StyleSheet.create({
   },
   spacer: {
     flexGrow: 1,
+  },
+  imagePickerMenu: {
+    width: DeviceWidth,
+    position: 'absolute',
+    bottom: 10,
+  },
+  imagePickerMenuButtons: {
+    backgroundColor: colors.gray5,
+    width: DeviceWidth - 20,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  hr: {
+    borderBottomColor: colors.gray7,
+    borderBottomWidth: 0.5,
+    marginVertical: 5,
   },
   testResultsContainer: {
     width: DeviceWidth,

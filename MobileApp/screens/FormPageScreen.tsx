@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import * as React from 'react';
-import {
-  Text,
-  View,
-  TextInput, TouchableHighlight, TouchableNativeFeedback, Keyboard,
-} from 'react-native';
+import { useState } from 'react';
+import { Keyboard, Text, TextInput, TouchableHighlight, TouchableNativeFeedback, View } from 'react-native';
 import MeterInput from '../components/MeterInput';
 import { Spinner } from '../components/Spinner';
 import { Form } from '../constants/Forms';
