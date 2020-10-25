@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.success,
+    backgroundColor: colors.gray6,
   },
   backgroundImage: {
     flex: 1,

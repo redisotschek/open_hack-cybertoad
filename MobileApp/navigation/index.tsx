@@ -49,7 +49,7 @@ function RootNavigator() {
         headerTitleAlign: 'center',
         headerBackTitleVisible: false,
       }}>
-      <Stack.Screen name="Root" component={MainPageScreen} options={{ headerTitle: props => <LogoTitle {...props} />,
+      <Stack.Screen name="Root" component={MainPageScreen} options={{ headerTitle: () => <LogoTitle/>,
         headerTransparent: true,}}/>
       <Stack.Screen name="Form" component={FormPageScreen} options={{ title: 'Коммунальные услуги' }} />
       <Stack.Screen name="Test" component={TestPageScreen} options={{ title: 'Тестирование' }} />
