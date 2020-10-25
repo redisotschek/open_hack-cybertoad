@@ -10,6 +10,8 @@ import ImagePicker from "./ImagePicker";
 
 export function MeterInput() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [value, setValue] = useState('')
+  const [serialNumber, setSerialNumber] = useState('')
 
   const openModal = () => {
     setModalVisible(true);
@@ -19,11 +21,23 @@ export function MeterInput() {
     setModalVisible(false);
   }
 
-  const sendPhoto = (photo: CameraCapturedPicture) => {
-    closeModal()
-    console.log('uri', photo.uri);
-    // console.log('base64', photo.base64);
-  };
+
+const sendPhoto = (photo: CameraCapturedPicture): Promise<void> => {
+    return fetch('http://192.168.31.123:5000/fullData',
+        {
+            //method: 'POST'
+            // body: JSON.stringify({
+            //   base64: photo.base64,
+            // })
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            this.setState(Object.assign(this.state, json ));
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
 
   DeviceEventEmitter.addListener('closeModal', closeModal);
   DeviceEventEmitter.addListener('sendPhoto', (photo) => sendPhoto(photo));
@@ -65,12 +79,25 @@ export function MeterInput() {
 
       <TextInput
         style={ [customStyles.input, {paddingRight: 40}] }
+        value={value}
         keyboardType={ 'numeric' }
       />
       <View style={ [customStyles.inputHint] }>
         {/*TODO: Добавить текст ошибки*/ }
         <Text style={ customStyles.grayText }></Text>
       </View>
+        { !!serialNumber && (
+            <View>
+                <Text style={ [customStyles.grayText, customStyles.textXS, customStyles.pb5] }>Серийный номер счетчика</Text>
+                <TextInput
+                    style={ [customStyles.input, {paddingRight: 40}] }
+                    value={ serialNumber }
+                    keyboardType={ 'numeric' }
+                />
+                <View style={ [customStyles.inputHint] }>
+                </View>
+            </View>
+        ) }
       <PhotoBtn/>
 
 
@@ -105,5 +132,5 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     backgroundColor: '#00000040',
-  }
+  },
 });

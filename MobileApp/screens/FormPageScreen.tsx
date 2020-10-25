@@ -3,12 +3,18 @@ import * as React from 'react';
 import {
   Text,
   View,
-  TextInput, TouchableHighlight,
+  TextInput, TouchableHighlight, TouchableNativeFeedback, Keyboard,
 } from 'react-native';
-import { MeterInput } from '../components/MeterInput';
+import MeterInput from '../components/MeterInput';
 import { Spinner } from '../components/Spinner';
 import { Form } from '../constants/Forms';
 import styles from '../constants/Styles';
+
+const DismissKeyboard = ({children}) => (
+  <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
+    { children }
+  </TouchableNativeFeedback>
+);
 
 // @ts-ignore
 export default function FormPageScreen({route, navigation}) {
@@ -25,6 +31,7 @@ export default function FormPageScreen({route, navigation}) {
   };
 
   return (
+    <DismissKeyboard>
     <View
       style={ {
         flex: 1,
@@ -43,12 +50,12 @@ export default function FormPageScreen({route, navigation}) {
 
         <View>
           <Text style={ [styles.grayText, styles.textXS, styles.pb5] }>{ form.labelFirst }</Text>
-          <MeterInput/>
+          <MeterInput key={ `${form.id}First` }/>
         </View>
 
         <View>
           <Text style={ [styles.grayText, styles.textXS, styles.pb5] }>{ form.labelSecond }</Text>
-          <MeterInput/>
+          <MeterInput key={ `${form.id}Second` }/>
         </View>
       </View>
 
@@ -60,5 +67,6 @@ export default function FormPageScreen({route, navigation}) {
         </TouchableHighlight>
       </View>
     </View>
+    </DismissKeyboard>
   );
 }
